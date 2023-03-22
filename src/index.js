@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import bounty from 'bounty';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import bounty from "bounty";
 
 export default class ReactBounty extends PureComponent {
     // Information about options can be found here:
@@ -25,8 +25,15 @@ export default class ReactBounty extends PureComponent {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.value != prevProps.value) {
+            // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
+            this.forceUpdate();
+        }
+    }
+
     render() {
-        return React.createElement('div', {
+        return React.createElement("div", {
             className: this.props.className,
             ref: this.node,
         });
