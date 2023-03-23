@@ -17,12 +17,23 @@ export default class ReactBounty extends PureComponent {
     node = React.createRef();
 
     componentDidMount() {
+        console.log("STARTING");
         const { value, ...options } = this.props;
-        bounty({
+        const { cancel, pause, resume } = bounty({
             el: this.node.current,
             value,
             ...options,
         });
+
+        setInterval(() => {
+            debugger;
+            console.log("rerendering");
+            bounty({
+                el: this.node.current,
+                value,
+                ...options,
+            });
+        }, 5000);
     }
 
     componentDidUpdate(prevProps) {
