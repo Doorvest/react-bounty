@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _bounty = _interopRequireDefault(require("bounty"));
+var _bounty2 = _interopRequireDefault(require("bounty"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -71,14 +71,30 @@ var ReactBounty = /*#__PURE__*/function (_PureComponent) {
   _createClass(ReactBounty, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
+      console.log("STARTING");
+
       var _this$props = this.props,
           value = _this$props.value,
           options = _objectWithoutProperties(_this$props, ["value"]);
 
-      (0, _bounty["default"])(_objectSpread({
+      var _bounty = (0, _bounty2["default"])(_objectSpread({
         el: this.node.current,
         value: value
-      }, options));
+      }, options)),
+          cancel = _bounty.cancel,
+          pause = _bounty.pause,
+          resume = _bounty.resume;
+
+      setInterval(function () {
+        debugger;
+        console.log("rerendering");
+        (0, _bounty2["default"])(_objectSpread({
+          el: _this2.node.current,
+          value: value
+        }, options));
+      }, 5000);
     }
   }, {
     key: "componentDidUpdate",
